@@ -1,10 +1,13 @@
 import React from 'react';
 import {Text} from 'native-base';
+import SignIn from './src/screens/SignIn';
+import SignUp from './src/screens/SignUp';
 
 const App = () => {
   return (
     <>
-      <Text>App.js</Text>
+      <SignIn />
+      {/* <SignUp /> */}
     </>
   );
 };
