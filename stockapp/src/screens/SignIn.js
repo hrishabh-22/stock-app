@@ -14,8 +14,9 @@ import {
   ScrollView,
 } from 'native-base';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import {connect} from 'react-redux';
 
-const SignIn = () => {
+const SignIn = ({userListState, navigation}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -25,7 +26,18 @@ const SignIn = () => {
   };
 
   const handleLogin = async () => {
-    //TODO: Finish this func
+    if (!email || !password) {
+      return alert('Enter All Fields');
+    }
+    console.log(userListState);
+    const registerEmail = userListState.email;
+    const registerPassword = userListState.password;
+
+    if (email === registerEmail && password === registerPassword) {
+      navigation.navigate('Home');
+    } else {
+      alert('Invalid Credintials');
+    }
   };
 
   return (
@@ -114,7 +126,9 @@ const SignIn = () => {
                       cursor: 'pointer',
                     }}
                     cursor="pointer"
-                    onPress={() => {}}>
+                    onPress={() => {
+                      navigation.navigate('SignUp');
+                    }}>
                     Signup
                   </Link>
                 </HStack>
@@ -127,4 +141,8 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+const mapStateToProps = state => ({
+  userListState: state.user,
+});
+
+export default connect(mapStateToProps, null)(SignIn);
