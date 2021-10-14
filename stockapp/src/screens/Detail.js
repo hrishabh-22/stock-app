@@ -28,6 +28,18 @@ const Detail = ({navigation, route}) => {
   return (
     <>
       <CustomHeader displayAllBtn={false} />
+      {details ? (
+        <ScrollView>
+          <Center flex={1} m="4">
+            <Heading size="sm">{details.meta.scheme_name}</Heading>
+            <Heading size="sm">by-{details.meta.fund_house}</Heading>
+          </Center>
+        </ScrollView>
+      ) : (
+        <Center flex={1}>
+          <Spinner color="red.700" size="lg" />
+        </Center>
+      )}
     </>
   );
 };
