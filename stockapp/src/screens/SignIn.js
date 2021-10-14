@@ -29,7 +29,6 @@ const SignIn = ({userListState, navigation}) => {
     if (!email || !password) {
       return alert('Enter All Fields');
     }
-    console.log(userListState);
     const registerEmail = userListState.email;
     const registerPassword = userListState.password;
 

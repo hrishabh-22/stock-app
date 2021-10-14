@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
 import {
-  Text,
   Heading,
   Center,
   VStack,
   Input,
-  Icon,
-  IconButton,
   Box,
   ScrollView,
   Button,
@@ -14,7 +11,6 @@ import {
 import CustomHeader from '../layout/CustomHeader';
 import {setUser} from '../action/user';
 import {connect} from 'react-redux';
-import MatIcon from 'react-native-vector-icons/MaterialIcons';
 
 const Profile = ({navigation, setUser, userListState}) => {
   const [name, setName] = useState(userListState.name);
@@ -37,7 +33,7 @@ const Profile = ({navigation, setUser, userListState}) => {
     <>
       <CustomHeader />
       <ScrollView>
-        <Center mt='8'>
+        <Center mt="8">
           <Heading>Dashboard</Heading>
         </Center>
         <Box mt="30%">
