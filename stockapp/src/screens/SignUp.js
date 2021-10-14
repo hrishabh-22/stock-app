@@ -15,11 +15,12 @@ import {
   Select,
   CheckIcon,
 } from 'native-base';
-
+import {connect} from 'react-redux';
+import {setUser} from '../action/user';
 import DatePicker from 'react-native-date-picker';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-const SignUp = () => {
+const SignUp = ({navigation, setUser}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,7 +32,28 @@ const SignUp = () => {
   const [gender, setGender] = useState('');
   const [openDatePicker, setOpenDatePicker] = useState(false);
 
-  const handleSignUp = async () => {};
+  const handleSignUp = async () => {
+    if (!name || !email || !password || !confirmPassword || !gender) {
+      return alert('Fill All Fields');
+    }
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+      return alert('Enter Valid Email');
+    }
+
+    if (password !== confirmPassword) {
+      return alert('Password Does Not Match');
+    }
+
+    const userData = {
+      name,
+      email,
+      password,
+      gender,
+      dob: date.toISOString().split('T')[0],
+    };
+    setUser(userData);
+    navigation.navigate('SignIn');
+  };
 
   return (
     <>
@@ -195,7 +217,9 @@ const SignUp = () => {
                     cursor: 'pointer',
                   }}
                   cursor="pointer"
-                  onPress={() => {}}>
+                  onPress={() => {
+                    navigation.navigate('SignIn');
+                  }}>
                   SignIn
                 </Link>
               </HStack>
@@ -207,4 +231,8 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const mapDispatchToProps = {
+  setUser: data => setUser(data),
+};
+
+export default connect(null, mapDispatchToProps)(SignUp);
